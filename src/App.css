@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #c300ff;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +35,88 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* 📌 Header */
+:root {
+  --primary-color: #8c46f7;
+  --secondary-color: #f5f5f5;
+  --text-color: #333;
+  --accent-color: #ff4fd8;
+  --max-width: 1200px;
+}
+
+/* 🧱 Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* 📌 Header */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent-color);
+}
+
+/* 📍 Footer */
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Home */
+.hero-section {
+  background-color: #8c46f7; /* morado CRAZY DIAMOND */
+  color: white;
+  padding: 5rem 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.hero-section h1 {
+  color: #ffffff; /* amarillo dorado para destacar el título */
+}
+
+.hero-section p {
+  color: #f5f5f5; /* texto más suave */
 }

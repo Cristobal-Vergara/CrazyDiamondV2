@@ -1,0 +1,111 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+const CompraError = () => {
+  const [compra, setCompra] = useState(null);
+
+  useEffect(() => {
+    const ultima = JSON.parse(localStorage.getItem("ultimaCompra"));
+    setCompra(ultima);
+  }, []);
+
+  if (!compra) {
+    return (
+      <div className="container text-center py-5">
+        <h3 className="text-danger">⚠️ No hay información de compra</h3>
+        <Link to="/" className="btn btn-primary mt-3">
+          Volver al inicio
+        </Link>
+      </div>
+    );
+  }
+
+  const { cliente, productos, total, fecha } = compra;
+
+  return (
+    <div className="container py-5">
+      <div className="card shadow-lg p-4 border-danger">
+        <h2 className="text-danger text-center mb-4 fw-bold">
+          ❌ No se pudo completar tu compra
+        </h2>
+        <p className="text-center text-muted">
+          Ocurrió un problema durante el pago o la validación del pedido.
+          <br />
+          Por favor, revisa tus datos o intenta nuevamente más tarde.
+        </p>
+        <p className="text-center text-muted">
+          Fecha del intento: <strong>{fecha}</strong>
+        </p>
+
+        {/* 🧍 Datos del cliente */}
+        <div className="border rounded p-3 mb-4 bg-light">
+          <h5 className="fw-bold mb-3 text-danger">👤 Datos del Cliente</h5>
+          <p><strong>Nombre:</strong> {cliente.nombre}</p>
+          <p><strong>Email:</strong> {cliente.email}</p>
+          <p><strong>Dirección:</strong> {cliente.direccion}</p>
+          <p><strong>Ciudad:</strong> {cliente.ciudad}</p>
+          <p>
+            <strong>Tipo de entrega:</strong>{" "}
+            {cliente.tipoEntrega === "domicilio"
+              ? "Envío a domicilio"
+              : "Retiro en tienda"}
+          </p>
+        </div>
+
+        {/* 🧺 Productos */}
+        <div className="border rounded p-3 mb-4">
+          <h5 className="fw-bold mb-3 text-danger">📦 Productos en tu pedido</h5>
+          <div className="table-responsive">
+            <table className="table table-striped text-center align-middle">
+              <thead className="table-dark">
+                <tr>
+                  <th>Imagen</th>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productos.map((p) => (
+                  <tr key={p.id}>
+                    <td>
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        width="80"
+                        className="rounded"
+                      />
+                    </td>
+                    <td>{p.title}</td>
+                    <td>{p.cantidad}</td>
+                    <td>${p.precio.toLocaleString()}</td>
+                    <td>${(p.precio * p.cantidad).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-end mt-3">
+            <h4 className="fw-bold text-danger">
+              Total pendiente: ${total.toLocaleString()}
+            </h4>
+          </div>
+        </div>
+
+        {/* 🔙 Botones */}
+        <div className="text-center">
+          <Link to="/comprar" className="btn btn-warning me-2">
+            🔁 Reintentar pago
+          </Link>
+          <Link to="/" className="btn btn-outline-secondary">
+            🏠 Volver al inicio
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CompraError;
